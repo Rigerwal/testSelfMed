@@ -36,6 +36,12 @@ public class OutputController {
         String xmlInput = externalApiSimulatorService.callApi("");
         String output = "";
 
+        /**
+         * Pour le output, il faudra retourner une liste d'objet de la classe status
+         * et boucler sur cette liste et faire un toString pour chacun des objet.
+         * Nous mettrons ca dans un string
+         */
+
         // TODO
 
         return output;
