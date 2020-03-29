@@ -1,5 +1,6 @@
 package fr.selfmed.test.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.selfmed.test.service.IExternalApiSimulatorService;
 import fr.selfmed.test.service.IXmlInputService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,18 +32,15 @@ public class OutputController {
         return output;
     }
 
+    /**
+     * Convert the XML format to selfmed format
+     * @return
+     * @throws JsonProcessingException
+     */
     @GetMapping("/api/output/selfmed")
-    public String getAsSelfmedFormat() {
-        String xmlInput = externalApiSimulatorService.callApi("");
-        String output = "";
-
-        /**
-         * Pour le output, il faudra retourner une liste d'objet de la classe status
-         * et boucler sur cette liste et faire un toString pour chacun des objet.
-         * Nous mettrons ca dans un string
-         */
-
-        // TODO
+    public String getAsSelfmedFormat() throws JsonProcessingException {
+        String xmlInput = xmlInputService.getXmlInput();
+        String output = externalApiSimulatorService.convertXmlToCustom(xmlInput);
 
         return output;
     }

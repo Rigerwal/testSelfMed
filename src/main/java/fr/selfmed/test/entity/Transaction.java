@@ -1,41 +1,66 @@
 package fr.selfmed.test.entity;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-enum Status {
-    ASSIGNED, NOTASSIGNED;
-}
-
+@JsonPropertyOrder({ "id", "date", "label", "amount", "status" })
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JacksonXmlRootElement(localName="root")
 public class Transaction {
 
-    private int transactionId;
-    private Date transactionDate;
-    private String label;
-    private Double amount;
-    private Status status;
+    @JsonProperty("id")
+    private Integer id;
 
-    public Transaction(int transactionId, Date transactionDate, String label, Double amount, Status status) {
-        this.transactionId = transactionId;
-        this.transactionDate = transactionDate;
+    @JsonProperty("date")
+    private String date;
+
+    @JsonProperty("label")
+    private String label;
+
+    @JsonProperty("amount")
+    private String amount;
+
+    @JsonProperty("status")
+    private String status;
+
+    public Transaction(Integer id, String date, String label, String amount, String status) {
+        super();
+        this.id = id;
+        this.date = date;
         this.label = label;
         this.amount = amount;
         this.status = status;
     }
 
-    public int getTransactionId() {
-        return transactionId;
+    public Transaction(Transaction tr) {
+        super();
+        this.id = tr.getId();
+        this.date = tr.getDate();
+        this.label = tr.getLabel();
+        this.amount = tr.getAmount();
+        this.status = tr.getStatus();
     }
 
-    public void setTransactionId(int transactionId) {
-        this.transactionId = transactionId;
+    public Transaction() {
+        super();
     }
 
-    public Date getTransactionDate() {
-        return transactionDate;
+    public Integer getId() {
+        return id;
     }
 
-    public void setTransactionDate(Date transactionDate) {
-        this.transactionDate = transactionDate;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getLabel() {
@@ -46,29 +71,29 @@ public class Transaction {
         this.label = label;
     }
 
-    public Double getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
-        return "transaction{" +
-                "transactionId=" + transactionId +
-                ", transactionDate=" + transactionDate +
+        return "Transaction{" +
+                "id=" + id +
+                ", date='" + date + '\'' +
                 ", label='" + label + '\'' +
-                ", amount=" + amount +
+                ", amount='" + amount + '\'' +
                 ", status='" + status + '\'' +
                 '}';
     }

@@ -14,6 +14,10 @@ public class ExternalEndpointSimulatorController {
         this.xmlInputService = xmlInputService;
     }
 
+    /**
+     * Gets the xml we will reformat
+     * @return
+     */
     @GetMapping("api/input/xml")
     public String getXml() {
         return xmlInputService.getXmlInput();
